@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.example.dell.pushstream.MainActivity">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/sd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="标清SD"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/hd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:text="高清HD"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/start_stop_textView"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:text="@string/start"
+        android:background="@color/unrecordBackground"/>
+</LinearLayout>

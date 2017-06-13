@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PushStream</string>
+    <string name="start">"Start Recording"</string>
+    <string name="stop">"Stop Recording"</string>
+</resources>
