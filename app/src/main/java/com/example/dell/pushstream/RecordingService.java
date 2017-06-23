@@ -10,7 +10,6 @@ import android.hardware.display.VirtualDisplay;
 import android.media.MediaRecorder;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
-import android.os.Environment;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.NotificationCompat;
@@ -40,6 +39,7 @@ public class RecordingService extends Service{
     private MediaRecorder mMediaRecorder;
     private VirtualDisplay mDisplay;
     private NotificationManager manager;
+    private String filePath;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -50,6 +50,7 @@ public class RecordingService extends Service{
         mHeight = intent.getIntExtra("height", 1280);
         mDensity = intent.getIntExtra("density", 1);
         isHd = intent.getBooleanExtra("quality", false);
+        filePath = intent.getStringExtra("filePath");
         mMediaProjection = createMediaProjection();
         mMediaRecorder = createMediaRecorder();
         mDisplay = createVirtualDisplay();//必须在mediaRecorder.prepare()之后调用
@@ -87,13 +88,8 @@ public class RecordingService extends Service{
         MediaRecorder mediaRecorder = new MediaRecorder();
         mediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        mediaRecorder.setOutputFile(Environment.getExternalStoragePublicDirectory(Environment.
-                DIRECTORY_MOVIES) + "/" + quality
-                + curTime + ".mp4");
-        Log.d("path", String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.
-                DIRECTORY_MOVIES)));
-        mediaRecorder.setVideoSize(mWidth, mHeight);
         mediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
+        mediaRecorder.setVideoSize(mWidth, mHeight);
         int bitrate;
         if (isHd){
             mediaRecorder.setVideoEncodingBitRate(5 * mWidth * mHeight);
@@ -104,12 +100,15 @@ public class RecordingService extends Service{
             mediaRecorder.setVideoFrameRate(30);
             bitrate = mWidth * mHeight / 1000;
         }
+        mediaRecorder.setOutputFile(filePath + "/" + quality
+                + curTime + ".mp4");
+        Log.d(TAG, filePath + "/" + quality + curTime + ".mp4");
         try {
             mediaRecorder.prepare();
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
-        Log.d(TAG, "SD video: " + quality + ", BitRate: " + bitrate + "kbps");
+//        Log.d(TAG, "SD video: " + quality + ", BitRate: " + bitrate + "kbps");
         return mediaRecorder;
     }
 

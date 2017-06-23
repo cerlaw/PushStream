@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private int mHeight;
     private int mDensity;
     private long mexitTime = 0;
+    private String filePath;
 
     private TextView mTextView;
 
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mWidth = metrics.widthPixels;
         mHeight = metrics.heightPixels;
         mDensity = metrics.densityDpi;
+        filePath = getCacheDir().getAbsolutePath();
     }
 
     private void getView() {
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("height", mHeight);
                 intent.putExtra("density", mDensity);
                 intent.putExtra("quality", isHd);
+                intent.putExtra("filePath", filePath);
                 startService(intent);
                 isStarted = true;
                 RecordingUI();
