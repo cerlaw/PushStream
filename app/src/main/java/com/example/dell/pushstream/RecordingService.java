@@ -108,7 +108,7 @@ public class RecordingService extends Service{
         } catch (IllegalStateException | IOException e) {
             e.printStackTrace();
         }
-//        Log.d(TAG, "SD video: " + quality + ", BitRate: " + bitrate + "kbps");
+        Log.d(TAG, "SD video: " + quality + ", BitRate: " + bitrate + "kbps");
         return mediaRecorder;
     }
 

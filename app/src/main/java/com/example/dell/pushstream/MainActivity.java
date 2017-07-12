@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         mWidth = metrics.widthPixels;
         mHeight = metrics.heightPixels;
         mDensity = metrics.densityDpi;
-        filePath = getCacheDir().getAbsolutePath();
+        filePath = getExternalCacheDir().getAbsolutePath();
     }
 
     private void getView() {
